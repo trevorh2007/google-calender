@@ -1,0 +1,31 @@
+button = link_to "Back", calendars_path
+= form_for(new_event_url) do |f|
+  = f.text_field :summary, placeholder: "Title"
+  = f.text_field :start, placeholder: "Start"
+  = f.text_field :end, placeholder: "End"
+  = submit_tag 'Add new event'
+- @event_list.items.each do |event|
+  h2 = event.summary
+  ul
+    li
+      h5
+        | ID: 
+        = event.id
+    li
+      - if event.start.date
+        h5
+        | Start: 
+        = event.start.date.to_date.strftime("%a %b %d")
+      - else event.start.date_time
+        h5
+        | Start: 
+        = event.start.date_time.to_date.strftime("%a %b %d")
+    li
+      - if event.end.date
+        h5
+        | End: 
+        = event.end.date.to_date.strftime("%a %b %d")
+      - else event.end.date_time
+        h5
+        | End: 
+        = event.end.date_time.to_date.strftime("%a %b %d")

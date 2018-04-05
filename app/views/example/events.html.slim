@@ -1,17 +1,27 @@
-button = link_to "Back", calendars_path
-= form_for(new_event_url) do |f|
-  = f.text_field :summary, placeholder: "Title"
-  = f.text_field :start, placeholder: "Start"
-  = f.text_field :end, placeholder: "End"
-  = submit_tag 'Add new event'
+br
+.container
+  .row.justify-content-center
+    .col.col-6
+      = form_for(new_event_url) do |f|
+        = f.label :summary, 'Title'
+        = f.text_field :summary, class: 'form-group form-control'
+
+        = f.label :start, 'Start Date'
+        = f.date_field :start, class: 'form-group form-control'
+
+        = f.label :end, 'End Date'
+        = f.date_field :end, class: 'form-group form-control'
+        .text-center
+          = f.submit 'Add new event', class: 'btn btn-primary'
+br
 - @event_list.items.each do |event|
   h2 = event.summary
-  ul
-    li
+  ul.list-group
+    li.list-group-item
       h5
         | ID: 
         = event.id
-    li
+    li.list-group-item
       - if event.start.date
         h5
         | Start: 
@@ -20,7 +30,7 @@ button = link_to "Back", calendars_path
         h5
         | Start: 
         = event.start.date_time.to_date.strftime("%a %b %d")
-    li
+    li.list-group-item
       - if event.end.date
         h5
         | End: 
@@ -28,4 +38,4 @@ button = link_to "Back", calendars_path
       - else event.end.date_time
         h5
         | End: 
-        = event.end.date_time.to_date.strftime("%a %b %d")
+        = event.end.date_time.to_date.strftime("%a %b %d")        

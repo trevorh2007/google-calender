@@ -1,6 +1,5 @@
-ul
+ul.list-group
   - @calendar_list.items.each do |calendar|
-    li
+    li.list-group-item.d-flex.justify-content-between
       = calendar.summary
-      | (#{calendar.id}) 
       = link_to "See events", events_path(calendar.id)

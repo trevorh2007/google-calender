@@ -14,28 +14,28 @@ br
         .text-center
           = f.submit 'Add new event', class: 'btn btn-primary'
 br
-- @event_list.items.each do |event|
-  h2 = event.summary
-  ul.list-group
-    li.list-group-item
-      h5
-        | ID: 
-        = event.id
-    li.list-group-item
-      - if event.start.date
-        h5
-        | Start: 
-        = event.start.date.to_date.strftime("%a %b %d")
-      - else event.start.date_time
-        h5
-        | Start: 
-        = event.start.date_time.to_date.strftime("%a %b %d")
-    li.list-group-item
-      - if event.end.date
-        h5
-        | End: 
-        = event.end.date.to_date.strftime("%a %b %d")
-      - else event.end.date_time
-        h5
-        | End: 
-        = event.end.date_time.to_date.strftime("%a %b %d")        
+.container
+  .row
+    .col.col-12
+      - @event_list.items.each do |event|
+        h4 = event.summary
+        ul.list-group
+          li.list-group-item
+            - if event.start.date
+              h5
+              | Start: 
+              = event.start.date.to_date.strftime("%a %b %d")
+            - else event.start.date_time
+              h5
+              | Start: 
+              = event.start.date_time.to_date.strftime("%a %b %d")
+          li.list-group-item
+            - if event.end.date
+              h5
+              | End: 
+              = event.end.date.to_date.strftime("%a %b %d")
+            - else event.end.date_time
+              h5
+              | End: 
+              = event.end.date_time.to_date.strftime("%a %b %d")
+        br    

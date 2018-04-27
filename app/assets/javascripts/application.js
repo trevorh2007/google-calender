@@ -11,8 +11,13 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
+//= require jquery3
+//= require jquery_ujs
+//= require jquery-ui
 //= require_tree .
 //= require jquery3
 //= require popper
 //= require bootstrap
+//= require moment 
+//= require fullcalendar
+//= require fullcalendar/gcal

@@ -29,3 +29,11 @@ gem 'slim', '~> 3.0', '>= 3.0.9'
 gem 'google-api-client', require: 'google/apis/calendar_v3'
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'jquery-ui-rails', '5.0.5'
+
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
+
+gem 'dotenv-rails', '~> 2.2', '>= 2.2.2'
+
+gem 'gon', '~> 6.2'

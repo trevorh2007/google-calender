@@ -31,6 +31,31 @@ class ExampleController < ApplicationController
     retry
   end
 
+  def new_event
+
+    client = Signet::OAuth2::Client.new(client_options)
+    client.update!(session[:authorization])
+
+    service = Google::Apis::CalendarV3::CalendarService.new
+    service.authorization = client
+
+    event = Google::Apis::CalendarV3::Event.new({
+      summary: params[events_url][:summary],
+      location: '800 Howard St., San Francisco, CA 94103',
+      description: params[events_url][:description],
+      start: {
+        date_time: params[events_url][:start],
+        time_zone: 'America/Denver'
+      },
+      attendees: [
+        { email: params[events_url][:attendees] }
+      ]
+    })
+    
+    service.insert_event(params[:calendar_id], event)
+    redirect_to events_url(calendar_id: params[:calendar_id])
+  end
+
   def events
     client = Signet::OAuth2::Client.new(client_options)
     client.update!(session[:authorization])
@@ -39,27 +64,31 @@ class ExampleController < ApplicationController
     service.authorization = client
 
     @event_list = service.list_events(params[:calendar_id])
-  end
-
-  def new_event
-    client = Signet::OAuth2::Client.new(client_options)
-    client.update!(session[:authorization])
-
-    service = Google::Apis::CalendarV3::CalendarService.new
-    service.authorization = client
-
-    today = Date.today
-
-    event = Google::Apis::CalendarV3::Event.new({
-      start: Google::Apis::CalendarV3::EventDateTime.new(date: today),
-      end: Google::Apis::CalendarV3::EventDateTime.new(date: today + 1),
-      summary: :title
+    
+    gon.push({
+      :calendar_id => params[:calendar_id]
     })
-
-    service.insert_event(params[:calendar_id], event)
-
-    redirect_to events_url(calendar_id: params[:calendar_id])
   end
+
+  # def new_event
+  #   client = Signet::OAuth2::Client.new(client_options)
+  #   client.update!(session[:authorization])
+
+  #   service = Google::Apis::CalendarV3::CalendarService.new
+  #   service.authorization = client
+
+  #   today = Date.today
+
+  #   event = Google::Apis::CalendarV3::Event.new({
+  #     start: Google::Apis::CalendarV3::EventDateTime.new(date: today),
+  #     end: Google::Apis::CalendarV3::EventDateTime.new(date: today + 1),
+  #     summary: :title
+  #   })
+
+  #   service.insert_event(params[:calendar_id], event)
+
+  #   redirect_to events_url(calendar_id: params[:calendar_id])
+  # end
 
   private
 

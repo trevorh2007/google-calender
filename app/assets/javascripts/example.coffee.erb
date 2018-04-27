@@ -1,0 +1,67 @@
+$ ->
+  $('#datepicker').datepicker({
+    dateFormat: 'yy-mm-dd',
+    showButtonPanel: true,
+    yearRange: '2018:2019',
+    minDate: new Date(),
+    maxDate: '+1Y'
+  })
+  $('#calendar').fullCalendar
+    header:
+      left: 'title'
+      right: 'month prev,next'
+    buttonText:
+      today: 'Today'
+      month: 'Month'
+      week: 'Week'
+      day: 'Day'
+      list: 'List'
+    allDaySlot: false
+    slotDuration: '01:00:00'
+    fixedWeekCount: false
+    nowIndicator: true
+    timezone: 'local'
+    googleCalendarApiKey: "<%= ENV['googleCalendarApiKey'] %>"
+    events: googleCalendarId: gon.calendar_id
+    selectable: true
+    editable: true
+    businessHours: [
+      {
+        dow: [
+          0
+          1
+          2
+          3
+          4
+        ]
+        start: '11:00'
+        end: '19:00'
+      }
+      {
+        dow: [
+          5
+          6
+        ]
+        start: '11:00'
+        end: '20:00'
+      }
+    ]
+    minTime: '11:00'
+    maxTime: '20:00'
+    # select: (start, end, jsEvent, view ) ->
+    #   alert start
+    #   alert end
+    #   return
+    dayClick: (date, jsEvent, view) ->
+      if view.name == 'month'
+        $('#calendar').fullCalendar 'gotoDate', date
+        $('#calendar').fullCalendar 'changeView', 'agendaDay'
+      if view.name == 'agendaDay'
+        # $(this).css 'background-color', 'red'
+        $('#time_start').val(date.format("hh:mm a"))
+      return
+    eventClick: (calEvent, jsEvent, view) ->
+      alert 'Event: ' + calEvent.title
+      $(this).css 'border-color', 'red'
+      return false
+  return

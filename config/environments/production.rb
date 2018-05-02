@@ -1,5 +1,8 @@
 Rails.application.configure do
   config.secret_key_base = ENV['SECRET_KEY_BASE']
+  config.google_client_id = ENV["google_client_id"]
+  config.google_client_secret = ENV["google_client_secret"]
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

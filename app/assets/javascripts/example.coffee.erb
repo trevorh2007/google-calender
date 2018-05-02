@@ -47,21 +47,22 @@ $ ->
       }
     ]
     minTime: '11:00'
-    maxTime: '20:00'
-    # select: (start, end, jsEvent, view ) ->
-    #   alert start
-    #   alert end
-    #   return
+    maxTime: '24:00'
+    selectConstraint: 'businessHours'
+    select: (start, end, jsEvent, view ) ->
+      $('#time_start').val(start.format("hh:mm a"))
+      $('#time_end').val(end.format("hh:mm a"))
+      return
     dayClick: (date, jsEvent, view) ->
       if view.name == 'month'
         $('#calendar').fullCalendar 'gotoDate', date
         $('#calendar').fullCalendar 'changeView', 'agendaDay'
-      if view.name == 'agendaDay'
-        # $(this).css 'background-color', 'red'
-        $('#time_start').val(date.format("hh:mm a"))
+      # if view.name == 'agendaDay'
+        # # $(this).css 'background-color', 'red'
+        # $('#time_start').val(date.format("hh:mm a"))
       return
     eventClick: (calEvent, jsEvent, view) ->
-      alert 'Event: ' + calEvent.title
+      alert 'Time slot unavailable'
       $(this).css 'border-color', 'red'
       return false
   return

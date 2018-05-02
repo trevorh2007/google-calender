@@ -15,73 +15,34 @@ br
     .col.col-4
       h5.text-center
         | Appointment Details
-      br
       = form_for(new_event_url) do |f|
-
-        / = f.label :summary, 'Title'
-        / = f.text_field :summary, class: 'form-group form-control'
-
-        / = f.label :description, 'Description'
-        / = f.text_field :description, class: 'form-group form-control'
-
-        / = f.label :start, 'Start Appointment'
-        / br
-        / = f.datetime_select :start, class: 'form-group form-control', minute_step: 15, start_year: Time.now.year, end_year: Time.now.year + 1, min: Time.now, default: { hour: 12, minute: 00 }, ampm: true, start_hour: 11, end_hour: 20
-        / br
-        / = f.label :test, 'Test datepicker'
-        / br
-        / = f.text_field :test, :id => "datepicker"
-        / = f.label :end, 'End Date'
-        / br
-        / = f.datetime_select :end, class: 'form-group form-control', minute_step: 15, start_year: Time.now.year, default: { hour: 1, minute: 00 }, ampm: true, start_hour: 11, end_hour: 20
-
-        / = f.label :start_day, 'Date'
-        / br
-        / = f.date_field :start_day, class: 'form-group form-control', min: Date.today, value: Date.today
-
-        / br
-        / = f.label :start_time, 'Appointment Start'
-        / = f.time_field :start_time, class: 'form-group form-control', step: 1800, min: Time.now
         br
         = f.label :artist, 'Artist'
         br
-        = f.text_field :artist, readonly: true
-        br
-        br
-        = f.label :time_start, 'Time'
-        br
-        = f.text_field :time_start, :readonly => true, id: 'time_start'
-        br
-        br
+        = f.text_field :artist, readonly: true, class: 'form-group form-control', value: 'The artist they picked'
+        .row
+          .col-6
+            = f.label :time_start, 'Start'
+            br
+            = f.text_field :time_start, :readonly => true, id: 'time_start', class: 'form-group form-control'
+          .col-6
+            = f.label :time_end, 'End'
+            br
+            = f.text_field :time_end, readonly: true, id: 'time_end', class: 'form-group form-control'
+        .row
+          .col-6
+            = f.label :first_name, 'First Name'
+            br
+            = f.text_field :first_name, class: 'form-group form-control'
+          .col-6
+            = f.label :last_name, 'Last Name'
+            br
+            = f.text_field :last_name, class: 'form-group form-control'
+
         = f.label :email, 'Your Email'
         = f.text_field :email, class: 'form-group form-control'
         .text-center
           p.googlecal-font12
             | A deposit will be required to secure and hold your appointment time. Click next to continue
         .text-center
-          = f.submit 'Next', summary: :summary, description: :description, start: :start, end: :end, attendees: :attendees, class: 'btn btn-primary'
-/ .container
-/   .row
-/     .col.col-12
-/       - @event_list.items.each do |event|
-/         h4 = event.summary
-/         ul.list-group
-/           li.list-group-item
-/             - if event.start.date
-/               h5
-/               | Start: 
-/               = event.start.date.to_date.strftime("%a %b %d")
-/             - else event.start.date_time
-/               h5
-/               | Start: 
-/               = event.start.date_time.to_date.strftime("%a %b %d")
-/           li.list-group-item
-/             - if event.end.date
-/               h5
-/               | End: 
-/               = event.end.date.to_date.strftime("%a %b %d")
-/             - else event.end.date_time
-/               h5
-/               | End: 
-/               = event.end.date_time.to_date.strftime("%a %b %d")
-/         br
+          = f.submit 'Next', summary: :summary, description: :description, start: :time_start, end: :time_end, attendees: :attendees, class: 'btn btn-primary'

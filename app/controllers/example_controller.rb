@@ -25,7 +25,7 @@ class ExampleController < ApplicationController
 
     @calendar_list = service.list_calendar_lists
   rescue Google::Apis::AuthorizationError
-    redirect_to root_path, alert: 'Session Expired. Please re-log to view calendars.'
+    redirect_to root_path, alert: 'You done messed up!', notice: 'Session Expired. Please re-log to view calendars.'
   end
 
   def new_event
@@ -67,7 +67,7 @@ class ExampleController < ApplicationController
     })
 
   rescue Google::Apis::AuthorizationError
-    redirect_to root_path, alert: 'Session Expired. Please re-log to view calendars.'
+    redirect_to root_path, alert: 'You done messed up!', notice: 'Session Expired. Please re-log to view calendars.'
   end
 
   # def new_event
@@ -102,5 +102,5 @@ class ExampleController < ApplicationController
       redirect_uri: callback_url
     }
   end
-  
+
 end

@@ -1,17 +1,12 @@
 .col-12.text-center
   br
-  - if notice
-    #alerts
-      .notice
-        = notice
-  - elsif alert
-    #alerts
-      .alert
-        = alert
+  - if flash
+    - flash.each do |key, value|
+      #alert
+        div class=key
+          = value
   - else
     br
     h3 Hey there, click the button to get your calendar
   br
-  / button.btn.btn-primary type="button" = link_to "Get my calendar", redirect_path
-  a.btn.btn-primary.btn-lg.mx-auto href="/redirect" role="button" 
-    | Get my calendar
+  = link_to "Get my calendars", redirect_path, class: 'btn btn-primary'

@@ -1,7 +1,16 @@
 .col-12.text-center
   br
-  br
-  h3 Hey there, click the button to get your calendar
+  - if notice
+    #alerts
+      .notice
+        = notice
+  - elsif alert
+    #alerts
+      .alert
+        = alert
+  - else
+    br
+    h3 Hey there, click the button to get your calendar
   br
   / button.btn.btn-primary type="button" = link_to "Get my calendar", redirect_path
   a.btn.btn-primary.btn-lg.mx-auto href="/redirect" role="button" 

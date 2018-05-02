@@ -1,0 +1,21 @@
+#alerts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notice {
+  background-color: $color-notice;
+  color: $color-alert-text;
+  width: 75%;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+
+.alert {
+  background-color: $color-alert;
+  color: $color-alert-text;
+  width: 75%;
+  border-radius: 5px;
+  padding: 10px 0;
+}

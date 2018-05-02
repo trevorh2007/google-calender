@@ -68,6 +68,13 @@ class ExampleController < ApplicationController
     gon.push({
       :calendar_id => params[:calendar_id]
     })
+
+  rescue Google::Apis::AuthorizationError
+    response = client.refresh!
+
+    session[:authorization] = session[:authorization].merge(response)
+
+    retry
   end
 
   # def new_event

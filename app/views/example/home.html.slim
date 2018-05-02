@@ -1,12 +1,18 @@
 .col-12.text-center
   br
-  - if flash
+  - if flash.any?
     - flash.each do |key, value|
       #alert
         div class=key
           = value
+    br
+    h5 Just click the button
+    h5 Everything will be fine
+    h5 Trust me
   - else
     br
-    h3 Hey there, click the button to get your calendar
+    h3 Oh hey
+    h3 Click the button
+    h3 Trust me
   br
   = link_to "Get my calendars", redirect_path, class: 'btn btn-primary'

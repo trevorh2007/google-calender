@@ -13,7 +13,7 @@ class ExampleController < ApplicationController
 
     session[:authorization] = response
 
-    redirect_to calendars_url
+    redirect_to calendars_url, alert: 'See, you can trust me'
   end
 
   def calendars

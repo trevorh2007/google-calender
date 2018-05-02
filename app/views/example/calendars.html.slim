@@ -1,6 +1,10 @@
 = include_gon
 br
 ul.list-group.container
+  - flash.each do |key, value|
+    #alert
+      div class=key
+        = value
   - @calendar_list.items.each do |calendar|
     li.list-group-item.d-flex.justify-content-between
       = calendar.summary

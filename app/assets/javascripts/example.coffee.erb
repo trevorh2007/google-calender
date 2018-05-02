@@ -49,6 +49,11 @@ $ ->
     minTime: '11:00'
     maxTime: '24:00'
     selectConstraint: 'businessHours'
+    selectAllow: (selectInfo) ->
+      duration = moment.duration(selectInfo.end.diff(selectInfo.start))
+      if duration.asHours() > 4
+        alert 'Maximum appointment length is 4 hours'
+      duration.asHours() <= 4
     select: (start, end, jsEvent, view ) ->
       $('#time_start').val(start.format("hh:mm a"))
       $('#time_end').val(end.format("hh:mm a"))
@@ -65,4 +70,7 @@ $ ->
       alert 'Time slot unavailable'
       $(this).css 'border-color', 'red'
       return false
+    validRange: (nowDate) ->
+        start: nowDate.clone().add(-1, 'days')
+        end: nowDate.clone().add(3, 'months')
   return

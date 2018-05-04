@@ -21,7 +21,7 @@ $ ->
     fixedWeekCount: false
     nowIndicator: true
     timezone: 'local'
-    googleCalendarApiKey: "<%= ENV['googleCalendarApiKey'] %>"
+    googleCalendarApiKey: gon.google_api_key
     events: googleCalendarId: gon.calendar_id
     selectable: true
     editable: true

@@ -63,7 +63,8 @@ class ExampleController < ApplicationController
     @event_list = service.list_events(params[:calendar_id])
     
     gon.push({
-      :calendar_id => params[:calendar_id]
+      :calendar_id => params[:calendar_id],
+      :google_api_key => ENV.fetch('googleCalendarApiKey')
     })
 
   rescue Google::Apis::AuthorizationError

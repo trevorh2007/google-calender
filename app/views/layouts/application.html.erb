@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Google Calendar</title>
+
+    <%= include_gon(:init => true) if defined? gon && gon.present? %>
     
     <%= csrf_meta_tags %>
 

@@ -22,10 +22,11 @@ class ExampleController < ApplicationController
 
     service = Google::Apis::CalendarV3::CalendarService.new
     service.authorization = client
-
     @calendar_list = service.list_calendar_lists
   rescue Google::Apis::AuthorizationError
     redirect_to root_path, alert: 'You done messed up!', notice: 'Session Expired. Please re-log to view calendars.'
+  rescue ArgumentError
+    redirect_to root_path, alert: 'You need to get calendars before you can view them!'
   end
 
   def new_event
@@ -41,8 +42,12 @@ class ExampleController < ApplicationController
       location: '800 Howard St., San Francisco, CA 94103',
       description: params[events_url][:description],
       start: {
-        date_time: params[events_url][:start],
-        time_zone: 'America/Denver'
+        dateTime: params[events_url][:start],
+        timeZone: 'America/Denver'
+      },
+      end: {
+        dateTime: params[events_url][:end],
+        timeZone: 'America/Denver'
       },
       attendees: [
         { email: params[events_url][:attendees] }

@@ -13,7 +13,9 @@ class ExampleController < ApplicationController
 
     session[:authorization] = response
 
-    redirect_to calendars_url, alert: 'See, you can trust me'
+    flash[:success] = 'See, you can trust me'
+
+    redirect_to calendars_url, :success => 'This is a test, please ignore.'
   end
 
   def calendars

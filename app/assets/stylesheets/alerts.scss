@@ -21,3 +21,12 @@
   padding: 10px 0;
   text-align: center;
 }
+
+.success {
+  background-color: $color-success;
+  color: $color-alert-text;
+  width: 75%;
+  border-radius: 5px;
+  padding: 10px 0;
+  text-align: center;
+}

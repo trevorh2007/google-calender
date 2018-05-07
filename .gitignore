@@ -18,5 +18,7 @@
 
 .byebug_history
 
+public/**
+
 secrets.yml
 .env
